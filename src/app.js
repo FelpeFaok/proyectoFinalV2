@@ -38,7 +38,7 @@ app.use('/', (req, res) => res.send('HOME'))
 // pass 7z3fNIwiCWOfoez4
 const MONGO_URI = 'mongodb+srv://Codertest:7z3fNIwiCWOfoez4@cluster0.ruk69i1.mongodb.net/?retryWrites=true&w=majority'
 mongoose.set('strictQuery', false)
-mongoose.connect(MONGO_URI, 
+mongoose.connect(MONGO_URI, {dbName: 'ecommerce'},
     error => {
         if(error){
             console.log('no se pudo conectar a la DB');

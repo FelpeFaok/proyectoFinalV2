@@ -1,11 +1,15 @@
 <h1>Index</h1>
 
 {{#each products}}
+
     <a href="/products/{{this.id}}">
         <div>
-            <b>{{this.id}}</b>
-            <b>{{this.name}}</b>
+            <b>{{this.title}}</b>
+            <b>{{this.description}}</b>
             <b>{{this.price}}</b>
+            <b>{{this.status}}</b>
+            <b>{{this.category}}</b>
+            <b>{{this.thumbnails}}</b>
         </div>
     </a>
 {{/each}}    

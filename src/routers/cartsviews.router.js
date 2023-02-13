@@ -1,13 +1,13 @@
 import {Router} from "express"
 import CartManager from "../dao/manager/cart.manager.js"
-
+import cartModel from "../dao/models/cart.model.js"
 
 const cartManager = new CartManager('carts.json')
 const router = Router()
 
 //obtiene y visualiza el array
 router.get('/', async (req, res) => {
-    const carts = await cartManager.get()
+    const carts = await cartModel.find().lean().exec()
     res.render('index', {carts})
 } )
 

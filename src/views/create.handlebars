@@ -1,14 +1,20 @@
 <h1>Create</h1>
 <form action="" method="post">
-    ID: <input type="number" name="id"><br>
-    Name: <input type="text" name="name"><br>
+    Name: <input type="text" name="title"><br>
+    Description: <input type="text" name="description"><br>
     Price: <input type="number" name="price"><br>
+    Status: <input type="number" name="status"><br>
+    Category: <input type="text" name="category"><br>
+    Photo: <input type="text" name="thumbnails"><br>
 
     <input type="submit" value="Crear">
 </form>
 <div>
-    <b>{{product.id}}</b>
-    <b>{{product.name}}</b>
+    <b>{{product.title}}</b>
+    <b>{{product.description}}</b>
     <b>{{product.price}}</b>
+    <b>{{product.status}}</b>
+    <b>{{product.category}}</b>
+    <b>{{product.thumbnails}}</b>
 </div>
 

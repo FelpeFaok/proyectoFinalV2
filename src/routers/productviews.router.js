@@ -36,12 +36,10 @@ router.post('/create', async (req, res) => {
 } )
 
 
-
 //muestra solo un producto segun id
 router.get('/:pid', async (req, res) => {
     const id = parseInt(req.params.pid)
     const product = await productModel.findOne({id: id}).lean().exec()
-    console.log(product);
     res.render('product' ,{product})
 } )
 
