@@ -22,8 +22,9 @@ switch (config.persistence) {
 
         break
     default: //case 'MONGO':
+    
         console.log('connecting mongo...');
-
+        mongoose.set('strictQuery', false)
         mongoose.connect(config.mongoURI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,

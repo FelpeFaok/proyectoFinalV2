@@ -45,7 +45,7 @@ initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
 
-
+mongoose.set('strictQuery', false)
 mongoose.connect(config.mongoURI, {
     dbName: config.mongoDbName
 }, (error) => {
@@ -53,7 +53,7 @@ mongoose.connect(config.mongoURI, {
         console.log("DB No conected...")
         return
     }
-    const httpServer = app.listen(8080, () => console.log("Listening..."))
+    const httpServer = app.listen(8080, () => console.log("Conectado..."))
     const socketServer = new Server(httpServer)
     httpServer.on("error", (e) => console.log("ERROR: " + e))
 

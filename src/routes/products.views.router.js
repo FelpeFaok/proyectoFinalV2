@@ -17,7 +17,7 @@ router.get('/', async(req, res) => {
 
     const data = await ProductService.getPaginate({}, options)
     const user = req.session.user
-    console.log(data)
+    // console.log(data)
 
     const front_pagination = []
     for (let i = 1; i <= data.totalPages; i++) {
