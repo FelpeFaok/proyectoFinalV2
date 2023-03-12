@@ -8,8 +8,8 @@ export default class User {
         return await UserModel.find()
     }
 
-    create = async(data) => {
-        await UserModel.create(data )
+    add = async(data) => {
+        await UserModel.create(data)
         return true
     }
 

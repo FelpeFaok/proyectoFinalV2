@@ -1,9 +1,7 @@
 import passport from "passport";
 import local from "passport-local"
 import jwt from 'passport-jwt'
-
 import { UserService } from "../repository/index.js";
-
 import { createHash, isValidPassword, generateToken, extractCookie } from '../utils.js'
 import config from "../config/config.js";
 
@@ -67,13 +65,24 @@ const initializePassport = () => {
         done(null, jwt_payload)
     }))
 
-    passport.serializeUser((user, done) => {
-        done(null, user.id)
-    })
-    passport.deserializeUser(async (id, done) => {
-        const user = await UserService.getOneByID(id)
-        done(null, user)
-    })
+    if (config.persistence === "FILE") {
+        passport.serializeUser((user, done) => {
+            done(null, user.id)
+        })
+        passport.deserializeUser(async (id, done) => {
+            const user = await UserService.getOneByID(id)
+            done(null, user)
+        })
+        
+    } else {
+        passport.serializeUser(async (user, done) => {
+            done(null, user._id)
+        })
+        passport.deserializeUser(async (id, done) => {
+            const user = await UserService.getOneByID(id)
+            done(null, user)
+        })
+    }
 }
 
 export default initializePassport
