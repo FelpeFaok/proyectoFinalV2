@@ -1,19 +1,51 @@
 import {Router} from "express"
-import { CartService } from "../repository/index.js"
-// import cartModel from '../dao/models/cart.model.js'
+import { get , create} from "../controller/carts.controller.js"
 
 const router = Router()
 
-router.get("/", async (req, res) => {
-    const carts = await CartService.get()
-    res.json({ carts })
-})
+router.get("/", get)
+router.post("/", create)
 
-router.post("/", async (req, res) => {
-    const newCart = await CartService.add({})
+export default router
 
-    res.json({status: "Success", newCart})
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------//
+// import cartModel from '../dao/models/cart.model.js'
 
 // //obtiene y visualiza el array desde el model
 // router.get('/', async (req, res) => {
@@ -77,4 +109,3 @@ router.post("/", async (req, res) => {
 // })
 
 
-export default router

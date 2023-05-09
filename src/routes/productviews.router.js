@@ -1,5 +1,5 @@
 import {Router} from "express"
-import mongoose, { mongo } from "mongoose"
+import mongoose from "mongoose"
 import FileManager from "../dao/manager/file.manager.js"
 import productModel from "../dao/models/product.model.js"
 

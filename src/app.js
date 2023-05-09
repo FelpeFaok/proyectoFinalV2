@@ -18,11 +18,11 @@ import config from "./config/config.js";
 import __dirname from "./utils.js"
 import { passportCall } from "./utils.js"
 
-
 const app = express()
-
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
+
 app.use(cookieParser(config.cookieSecret))
 app.use(express.static(__dirname + "/public"))
 app.engine("handlebars", handlebars.engine())
@@ -53,7 +53,7 @@ mongoose.connect(config.mongoURI, {
         console.log("DB No conected...")
         return
     }
-    const httpServer = app.listen(8080, () => console.log("Conectado..."))
+    const httpServer = app.listen(config.port, () => console.log("Conectado..."))
     const socketServer = new Server(httpServer)
     httpServer.on("error", (e) => console.log("ERROR: " + e))
 
@@ -85,41 +85,3 @@ mongoose.connect(config.mongoURI, {
 
 
 })
-
-// //trae la info de post como JSON
-// app.use(express.json())
-// app.use(express.urlencoded({extended: true}))
-
-// // motor de plantilla
-// app.engine('handlebars', handlebars.engine())
-// app.set('views', __dirname + '/views')
-// app.set('view engine', 'handlebars')
-
-// //configuramos carpeta publica
-// app.use(express.static(__dirname + '/public'))
-
-// //rutas
-// //productos
-// app.use('/products', productViews )
-// app.use('/api/products', productRouter )
-// //carritos 
-// app.use('/carts', cartViews )
-// app.use('/api/carts', cartRouter )
-
-
-// app.use('/', (req, res) => res.send('HOME'))
-
-// //coneccion a DB mongo atlas
-// // user Codertest
-// // pass 7z3fNIwiCWOfoez4
-// const MONGO_URI = 'mongodb+srv://Codertest:7z3fNIwiCWOfoez4@cluster0.ruk69i1.mongodb.net/?retryWrites=true&w=majority'
-// mongoose.set('strictQuery', false)
-// mongoose.connect(MONGO_URI, {dbName: 'ecommerce'},
-//     error => {
-//         if(error){
-//             console.log('no se pudo conectar a la DB');
-//             return
-//         }
-//         console.log('DB connected!');
-//         app.listen(8080, () => console.log('Server listennig'))
-//     })

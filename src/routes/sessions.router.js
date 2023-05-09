@@ -1,50 +1,21 @@
 import { Router } from "express";
 import passport from 'passport'
-import config from "../config/config.js";
+import { generalError, login, loginError, logout, register, registerError } from "../controller/sessions.controller.js";
 
 const router = Router()
 
 // REGISTER
-router.get('/register', (req, res) => {
-    res.render('sessions/register')
-})
-router.post('/register', passport.authenticate('register', { failureRedirect: '/session/error' }), (req, res) => {
-    res.redirect('/')
-})
+router.get('/register', register)
+router.post('/register', passport.authenticate('register', { failureRedirect: '/session/error' }), registerError)
 
 // LOGIN
-router.get('/login', (req, res) => {
-    res.render('sessions/login')
-})
-router.post('/login', passport.authenticate('login', { failureRedirect: '/session/error' }), (req, res) => {
-    if (!req.user) {
-        return res.status(400).render('errors/base', { error: 'Invalid credentials' })
-    }
-
-    req.session.user = {
-        first_name: req.user.first_name,
-        last_name: req.user.last_name,
-        email: req.user.email,
-        age: req.user.age,
-        role: req.user.role,
-        social: req.user.social
-    }
-    
-    res.cookie(config.jwtCookieName, req.user.token).redirect('/')
-})
+router.get('/login', login)
+router.post('/login', passport.authenticate('login', { failureRedirect: '/session/error' }), loginError)
 
 //LOGOUT
-router.get('/logout', async (req, res) => {
-    req.session.destroy(err => {
-        if (err) return res.status(500).render('errors/base', { error: err })
+router.get('/logout', logout)
 
-        res.clearCookie(config.jwtCookieName).redirect('/')
-    })
-})
-
-router.get('/error', async (req, res) => {
-    return res.status(500).render('errors/base', { error: "Error session" })
-})
+router.get('/error', generalError)
 
 
 export default router

@@ -14,11 +14,8 @@ export default class ProductRepository {
         return await this.dao.getPaginate(search, options)
     }
 
-    add = async(data) => {
+    create = async(data) => {
         const productToInsert = new ProductDTO(data)
-        const result = await this.dao.add(productToInsert)
-
-        return result
+        return await this.dao.create(productToInsert)
     }
-
 }
