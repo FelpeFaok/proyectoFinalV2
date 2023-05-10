@@ -6,6 +6,7 @@ export const get = async(req, res) => {
 }
 
 export const create = async(req, res)=> {
+    const carts = await CartService.get()
     const cartsNew = await CartService.add(carts)
 
     res.json({status: "Success",cartsNew})
