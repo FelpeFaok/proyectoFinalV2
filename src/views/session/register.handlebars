@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="form-container">
+        <h1>Registrar Usuarios</h1>
+        <form action="/session/register" method="post">
+            <p>
+                <a href="/session/login">¿tienes una cuenta?</a>
+            </p>
+            <label for="first_name">Nombre</label>
+            <input class="controls" id="first_name" type="text" name="first_name" required
+                placeholder="Juan">
+            <label for="last_name">Apellido</label>
+            <input class="controls" id="last_name" type="text" name="last_name" required
+                placeholder="Orellana">
+            <br>
+            <label for="email">Email</label>
+            <input class="controls" id="email" type="text" name="email" required placeholder="ejemplo@ejemplo.cl">
+            <br>
+            <label for="age">Edad</label>
+            <input class="controls" id="age" type="text" name="age" required placeholder="25">
+            <br>
+            <label for="role">Elige el rol:</label>
+            <select class="controls" name="role" required id="role">
+                <option value="user">User</option>
+                <option value="premium">Premium</option>
+            </select>
+            <br>
+            <label for="password">password</label>
+            <input class="controls" type="password" name="password" required id="password"
+                placeholder="Enter your password">
+            <br>
+            <input type="checkbox" name="Estoy de acuerdo con" required id="condiciones"> 
+            <label for="condiciones">Estoy de acuerdo con </label><a href="#"> Terminos y Condiciones</a>
+            <br><button type="submit" class="btn btn-primary">Crear</button>
+
+        </form>
+    </div>
+</div>

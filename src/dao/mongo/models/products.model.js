@@ -11,6 +11,13 @@ const productSchema = new mongoose.Schema({
     stock: Number,
     category: String,
     thumbnails: Array,
+    owner: {
+        role: {type: String, default:'User'},
+        id:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'users'
+        }
+    }
 })
 
 mongoose.set("strictQuery", false)

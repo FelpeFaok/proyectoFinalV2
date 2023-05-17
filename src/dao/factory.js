@@ -1,10 +1,11 @@
 import config from '../config/config.js'
-import mongoose, { mongo } from 'mongoose'
+import mongoose from 'mongoose'
 
 export let Cart
 export let Message
 export let Product
 export let User
+export let Ticket
 
 switch (config.persistence) {
     case 'FILE':
@@ -14,11 +15,13 @@ switch (config.persistence) {
         const { default: MessageFile } = await import('./file/messages.file.js')
         const { default: UserFile } = await import('./file/user.file.js')
         const { default: CartFile } = await import('./file/cart.file.js')
+        const { default: TicketFile } =await import('./file/ticket.file.js');
 
         Product = ProductFile
         Message = MessageFile
         User = UserFile
         Cart = CartFile
+        Ticket = TicketFile
 
         break
     default: //case 'MONGO':
@@ -36,11 +39,13 @@ switch (config.persistence) {
         const { default: MessageMongo } = await import('./mongo/messages.mongo.js')
         const { default: UserMongo } = await import('./mongo/user.mongo.js')
         const { default: CartMongo } = await import('./mongo/cart.mongo.js')
+        const { default: TicketMongo } =await import('./mongo/ticket.mongo.js');
 
         Product = ProductMongo
         Message = MessageMongo
         User = UserMongo
         Cart = CartMongo
+        Ticket = TicketMongo
 
         break
 }

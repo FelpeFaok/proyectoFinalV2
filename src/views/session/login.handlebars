@@ -1,0 +1,18 @@
+<div class="container">
+
+    <div class="form-container">
+        <h1>Iniciar Sesion</h1>
+        <form action="/session/login" method="post">
+            <label for="email">Email</label>
+            <input class="controls" id="email" type="text" name="email" required placeholder="ejemplo@ejemplo.cl">
+
+            <label for="password">password</label>
+            <input class="controls" type="password" name="password" required id="password" placeholder="Password">
+            <p><a href="/session/sendrestore">Olvidaste tu contraseña</a></p>
+            <p><a href="/session/register">¿No tienes una cuenta?</a></p>
+            <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+        </form>
+
+    </div>
+
+</div>

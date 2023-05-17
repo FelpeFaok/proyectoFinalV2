@@ -6,23 +6,52 @@ export default class UserRepository {
         this.dao = dao
     }
 
-    get = async() => {
-        return await this.dao.get()
+    getAll = async()=>{
+        try {
+            return await this.dao.getAll();
+        } catch (error) {
+            console.log('Error en getAll: '+ error);
+        }
     }
 
     create = async(data) => {
-        const dataToInsert = new UserDTO(data)
-        const result = await this.dao.add(dataToInsert)
-
-        return result
+        try {
+            const dataToInsert = new UserDTO(data)
+            const result = await this.dao.add(dataToInsert)
+            return result
+        } catch (error) {
+            console.log('Error en create: '+ error);
+        }
     }
 
-    getOneByID = async(id) => {
-        return await this.dao.getOneByID(id)
+    getOne = async(id)=>{
+        try {
+            return await this.dao.getOne(id);
+        } catch (error) {
+            console.log('Usuario no encontrado');
+        }
     }
 
-    getOneByEmail = async(email) => {
-        return await this.dao.getOneByEmail(email)
+    getOneByEmail = async(email)=>{
+        try {
+            return await this.dao.getOneByEmail(email);
+        } catch (error) {
+            console.log('Usuario no encontrado por mail');
+        }
     }
 
-}
+    update = async (id, newUser)=>{
+        try {
+            const userToInsert = new UserDTO(newUser);
+            const result = await this.dao.update(id, userToInsert);
+            return result;
+        } catch (error) {
+            console.log('Error en update: ' + error);
+        }
+    }
+
+} 
+
+
+
+
