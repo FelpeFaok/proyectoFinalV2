@@ -1,4 +1,4 @@
-import  { Product, Cart, User, Message, Ticket } from '../DAO/factory.js'
+import  { Product, Cart, User, Message, Ticket } from '../dao/factory.js'
 
 import ProductRepository from '../repository/products.repository.js'
 import CartRepository from '../repository/cart.repository.js'
