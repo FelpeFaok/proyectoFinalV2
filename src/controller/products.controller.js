@@ -19,7 +19,6 @@ export const getAll = async (req, res) => {
         return res.render('logHome', {
             user,
             role: (user?.role == 'admin'),
-            style: 'logHome.css',
             data: products.docs
         });
     } catch (error) {
@@ -28,15 +27,18 @@ export const getAll = async (req, res) => {
 }
 
 export const getOne = async(req, res)=>{
+    console.log(req.params.pid);
     try {
         const pid = req.params.pid;
         const prod = await ProductService.getOne(pid);
+        console.log(prod);
+
         if (!prod) {
-            console.log(`Error obtener producto id:${pid})`);
+            console.log(`Error obtener producto id:${pid}`);
         }
         res.send({ status: 'successful', payload: prod })
     } catch (error) {
-        req.logger.error('Error: ', error);
+        console.log('Error: ', error);
     }
 }
 
@@ -60,36 +62,13 @@ export const create = async (req, res) => {
     }
 }
 
-
-// export const create = async(req, res)=>{
-//     try {
-//         const product = req.body;
-//         const user = req.user.user;
-//         product.owner = {
-//             role: user.role,
-//             id: user._id
-//         }
-//         const productAdded = await ProductService.create(product);
-//         if (!productAdded) {
-//             console.log("Error al crear el producto");
-//         }
-//         res.json({
-//             status: "Success",
-//             productAdded
-//         })
-//     } catch (error) {
-//         console.log('Error: ' +error);
-//         res.json({error})
-//     }
-// }
-
 export const update = async(req, res)=>{
     try {
         const pid = req.params.pid;
         const update = req.body;
         const result = await ProductService.update(pid, update);
         if (!result) {
-            console.log(`Error actualizar producto id:${pid})`);
+            console.log(`Error actualizar producto id:${pid}`);
         }
         res.send({ status: 'successful', payload: result });
     } catch (error) {
@@ -104,7 +83,7 @@ export const deleteProd = async(req, res)=>{
 
         const result = await ProductService.deleteByOwner(pid, user);
         if (!result) {
-            console.log(`Error eliminar producto id:${pid})`);
+            console.log(`Error eliminar producto id:${pid}`);
         }
         res.send({ status: 'successful', payload: result });
     } catch (error) {

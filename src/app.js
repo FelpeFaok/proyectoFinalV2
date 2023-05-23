@@ -65,11 +65,11 @@ mongoose.connect(config.mongoURI, {
     app.use("/products", passportCall('jwt'), productRouter)
     app.use("/session", sessionRouter)
 
-    app.use("/api/products", productRouter)
-    app.use("/api/carts", cartRouter)
-    app.use("/api/chat", chatRouter)
+    app.use("/api/products",passportCall('jwt'), productRouter)
+    app.use("/api/carts",passportCall('jwt'), cartRouter)
+    app.use("/api/chat",passportCall('jwt'), chatRouter)
 
-    app.use("/", (req, res) => {
+    app.use("/",passportCall('jwt'), (req, res) => {
         const user = req.session?.user || null
         res.render("index", { user })
     })
