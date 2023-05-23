@@ -1,4 +1,4 @@
-import CartDTO from '../DAO/DTO/cart.dto.js'
+import CartDTO from '../dao/dto/cart.dto.js'
 
 export default class CartRepository {
 

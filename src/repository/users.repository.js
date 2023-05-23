@@ -1,4 +1,4 @@
-import UserDTO from '../DAO/DTO/user.dto.js'
+import UserDTO from '../dao/dto/user.dto.js'
 
 export default class UserRepository {
 
