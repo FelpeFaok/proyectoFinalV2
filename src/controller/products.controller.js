@@ -52,13 +52,23 @@ export const getAll = async (req, res) => {
             })
         }
         const user = req.user.user || {};
-        res.render('admin/products',{
+
+        if (user?.role == "user") {
+            res.render('user/users',{
+                
+                data: products.docs,
+                user,
+                front: {pagination: front_pagination}
+                })
+        } else {
+            res.render('admin/products',{
                 
                 data: products.docs,
                 user, 
                 role: (user?.role == 'admin' || 'premium'),
                 front: {pagination: front_pagination}
                 })
+        } 
 
 
     } catch (error) {

@@ -1,0 +1,66 @@
+<h1>Products</h1>
+<hr>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="/products?limit=5">5</a></li>
+        <li class="page-item"><a class="page-link" href="/products?limit=10">10</a></li>
+        <li class="page-item"><a class="page-link" href="/products?limit=15">15</a></li>
+    </ul>
+</nav>
+
+<table id="productsTable" class="table table-striped">
+    <thead>
+        <tr>
+            <td><strong>Producto</strong></td>
+            <th><strong>Foto</strong></th>
+            <td><strong>Descripción</strong></td>
+            <td><strong>Precio</strong></td>
+            <td><strong>Stock</strong></td>
+            <td><strong>Categoría</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{title}}</td>
+            <td>
+                {{#each thumbnails}}
+                <img src="{{this}}" width="60"  alt="">
+                {{/each}}
+            </td>
+            <td>{{description}}</td>
+            <td>{{price}}</td>
+            <td>{{stock}}</td>
+            <td>{{category}}</td>
+            <td>
+                <form class="send-cart" action="/api/carts/{{../user.cart}}/products/{{_id}}" method="post">
+                    <input class="botons" type="submit" value="Agregar">
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<nav aria-label="...">
+    <ul class="pagination">
+
+        <li class="page-item {{#if data.hasPrevPage}}{{else}}disabled{{/if}}">
+            <a class="page-link" href="/products?page={{data.prevPage}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+
+        {{#each front.pagination}}
+            <li class="page-item {{#if this.active}}active{{/if}}"><a class="page-link" href="/products?page={{this.page}}">{{this.page}}</a></li>
+        {{/each}}
+        
+        <li class="page-item {{#if data.hasNextPage}}{{else}}disabled{{/if}}">
+            <a class="page-link" href="/products?page={{data.nextPage}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>

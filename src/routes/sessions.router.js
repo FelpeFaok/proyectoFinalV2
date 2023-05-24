@@ -63,7 +63,7 @@ router.get('/secret', passportCall('jwt'), authorization('admin'), (req, res)=>{
     res.send({status: 'success', payload: req.user, role: 'ADMIN'});
 });
 
-router.get('/current', passportCall('jwt'), authorization('user'), (req, res)=>{
+router.get('/current', passportCall('jwt'), (req, res)=>{
     res.render('session/profile', {
         user: new UserDTO(req.user.user).getCurrent()
     })

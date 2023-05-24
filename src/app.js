@@ -63,7 +63,7 @@ mongoose.connect(config.mongoURI, {
         req.io = socketServer
         next()
     })
-    
+
     const swaggerOptions = {
         definition: {
             openapi: '3.0.1',
@@ -80,7 +80,6 @@ mongoose.connect(config.mongoURI, {
 
     app.use('/', productViewsRouter)
     app.use("/products", passportCall('jwt'), productRouter)
-    app.use(`/product/productViewsRouter`, passportCall('jwt'), productViewsRouter)
 
     app.use("/session", sessionRouter)
 
