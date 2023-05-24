@@ -3,7 +3,7 @@ import handlebars from "express-handlebars"
 import { Server } from "socket.io";
 import mongoose from "mongoose";
 import productRouter from "./routes/products.router.js"
-// import productViewsRouter from "./routes/products.views.router.js"
+import productViewsRouter from "./routes/products.views.router.js"
 import cartRouter from "./routes/cart.router.js"
 import chatRouter from "./routes/chat.router.js"
 import sessionRouter from "./routes/sessions.router.js"
@@ -63,16 +63,15 @@ mongoose.connect(config.mongoURI, {
     })
 
     app.use("/products", passportCall('jwt'), productRouter)
+    app.use(`/product/productViewsRouter`, passportCall('jwt'), productViewsRouter)
+
     app.use("/session", sessionRouter)
 
     app.use("/api/products",passportCall('jwt'), productRouter)
     app.use("/api/carts",passportCall('jwt'), cartRouter)
     app.use("/api/chat",passportCall('jwt'), chatRouter)
 
-    app.use("/",passportCall('jwt'), (req, res) => {
-        const user = req.session?.user || null
-        res.render("index", { user })
-    })
+    app.use('/', productViewsRouter)
 
     socketServer.on("connection", socket => {
         console.log("New client connected")

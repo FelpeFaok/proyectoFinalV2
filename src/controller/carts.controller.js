@@ -22,7 +22,6 @@ export const getAll = async (req, res) =>{
         res.render('carts',
         { 
             titlePage: 'Carts',
-            style: 'cart.css',
             carts
         });
     } catch (error) {
@@ -39,7 +38,6 @@ export const getOne = async (req, res) =>{
         }
         return res.render('carts', {
             titlePage: 'Cart',
-            style: 'cart.css',
             cart
         });
     } catch (error) {
@@ -148,7 +146,7 @@ export const purchase = async (req, res) =>{
             const resultTocken = await TicketService.create(user.email, status.totalPrice);
             status.tocken = resultTocken;
         }
-        res.json({status: 'successful', status});
+        res.redirect(`/products`)
     } catch (error) {
         console.log('Error: ', error);
     }

@@ -1,6 +1,37 @@
 import {ProductService } from "../repository/index.js";
 
 
+export const getForIndex = async (req, res) => {
+    try {
+        let limit = req.query?.limit ?? 10;
+        let page = req.query?.page ?? 1;
+        let filter = req.query?.filter ?? '';
+        let sortQuery = req.query?.sort ?? '';
+        let sortQueryOrder = req.query?.sortOrder ?? 'desc';
+
+        const products = await ProductService.getAll(limit, page, filter, sortQuery, sortQueryOrder);
+        if (!products) {
+            console.log("Error al obtener productos");
+        }
+        const front_pagination = []
+        for (let i = 1; i <= products.totalPages; i++) {
+            front_pagination.push({
+                page: i,
+                active: i == products.page
+            })
+        }
+        res.render('index',{
+                
+                data: products.docs,
+                front: {pagination: front_pagination}
+                })
+
+
+    } catch (error) {
+        console.log('Error: ', error);
+    }
+}
+
 export const getAll = async (req, res) => {
     try {
         let limit = req.query?.limit ?? 10;
@@ -13,14 +44,23 @@ export const getAll = async (req, res) => {
         if (!products) {
             console.log("Error al obtener productos");
         }
-
+        const front_pagination = []
+        for (let i = 1; i <= products.totalPages; i++) {
+            front_pagination.push({
+                page: i,
+                active: i == products.page
+            })
+        }
         const user = req.user.user || {};
-        console.log(user);
-        return res.render('logHome', {
-            user,
-            role: (user?.role == 'admin'),
-            data: products.docs
-        });
+        res.render('admin/products',{
+                
+                data: products.docs,
+                user, 
+                role: (user?.role == 'admin' || 'premium'),
+                front: {pagination: front_pagination}
+                })
+
+
     } catch (error) {
         console.log('Error: ', error);
     }

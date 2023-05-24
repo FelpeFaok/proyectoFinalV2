@@ -9,7 +9,6 @@
                     <td><strong>Producto</strong></td>
                     <td><strong>Descripción</strong></td>
                     <td><strong>Precio</strong></td>
-                    <th><strong>Foto</strong></th>
                     <th><strong>Cantidad</strong></th>
                 </tr>
             </thead>
@@ -20,11 +19,6 @@
                         <td>{{this.title}}</td>
                         <td>{{description}}</td>
                         <td>{{price}}</td>
-                        <td>
-                            {{#each thumbnails}}
-                        <img src="{{this}}" width="60" alt="">
-                            {{/each}}
-                        </td>
                         {{/id}}
                         <td>{{this.quantity}}</td>
                     </tr>

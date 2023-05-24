@@ -15,8 +15,10 @@ export default class UserDTO {
             first_name: this.first_name,
             last_name: this.last_name,
             email: this.email,
+            role: this.role,
             age: this.age,
-            cart: this.cart
+            cart: this.cart,
+            id: this.id || this._id
         }
     }
 }

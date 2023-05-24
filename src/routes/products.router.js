@@ -15,5 +15,8 @@ router.put('/:pid', authorization('user'), update);
 
 router.delete('/:pid', authorization('user'), deleteProd);
 
+// router.post('/:pid', authorization('user'), deleteProd);
+
+
 export default router;
 

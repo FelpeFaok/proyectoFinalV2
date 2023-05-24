@@ -1,19 +1,34 @@
 <div class="card">
-    <div class="card-header">
-        Productos
+    <div>        
+        <table id="productsTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <td><strong>Producto</strong></td>
+                    <th><strong>Foto</strong></th>
+                    <td><strong>Descripción</strong></td>
+                    <td><strong>Precio</strong></td>
+                    <td><strong>Stock</strong></td>
+                    <td><strong>Categoría</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data}}
+                <tr>
+                    <td>{{title}}</td>
+                    <td>
+                        {{#each thumbnails}}
+                        <img src="{{this}}" width="60"  alt="">
+                        {{/each}}
+                    </td>
+                    <td>{{description}}</td>
+                    <td>{{price}}</td>
+                    <td>{{stock}}</td>
+                    <td>{{category}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </div>
-    <div class="card-body">
-        <h5 class="card-title">Lista de productos</h5>
-        <p class="card-text">Por desarrollar</p>
 
-        {{#if user }}
-        <a href="/products" class="btn btn-primary">Mostrar Productos</a>
-        {{else}}
-        <a href="/session/login" class="btn btn-primary">Iniciar Session</a>
-        <a href="/session/register" class="btn btn-primary">Registrar</a>
-        {{/if}}
-
-
-    </div>
 </div>
 

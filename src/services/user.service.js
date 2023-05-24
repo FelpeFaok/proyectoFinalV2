@@ -1,4 +1,4 @@
-import UserDTO from "../dao/DTO/user.dto.js";
+import UserDTO from "../dao/dto/user.dto.js";
 import User from "../dao/mongo/user.mongo.js"; 
 
 export default class UserService{

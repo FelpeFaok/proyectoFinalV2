@@ -1,25 +1,41 @@
 <h1>Realtime</h1>
 <br>
-<table id="productsTable">
-    <tr>
-        <td><strong>Producto</strong></td>
-        <td><strong>Descripción</strong></td>
-        <td><strong>Precio</strong></td>
-        <td><strong>Código</strong></td>
-        <td><strong>Stock</strong></td>
-        <td><strong>Categoría</strong></td>
-    </tr>
-    {{#each data}}
-    <tr>
-    <td>{{this.title}}</td>
-    <td>{{this.description}}</td>
-    <td>{{this.price}}</td>
-    <td>{{this.code}}</td>
-    <td>{{this.stock}}</td>
-    <td>{{this.category}}</td>
-    </tr>
-    {{/each}}  
-</table>
+    <div>
+        <table id="productsTable" class="table-cart">
+            <h1>PRODUCTOS</h1>
+            <thead>
+                <tr>
+                    <td><strong>Producto</strong></td>
+                    <th><strong>Foto</strong></th>
+                    <td><strong>Descripción</strong></td>
+                    <td><strong>Precio</strong></td>
+                    <td><strong>Stock</strong></td>
+                    <td><strong>Categoría</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data}}
+                <tr>
+                    <td>{{title}}</td>
+                    <td>
+                        {{#each thumbnails}}
+                        <img src="{{this}}" width="60"  alt="">
+                        {{/each}}
+                    </td>
+                    <td>{{description}}</td>
+                    <td>{{price}}</td>
+                    <td>{{stock}}</td>
+                    <td>{{category}}</td>
+                    <td>
+                        <form class="send-cart" action="/api/carts/{{../user.cart}}/products/{{_id}}" method="post">
+                            <input class="botons" type="submit" value="Agregar">
+                        </form>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 <div id="moving"></div>
 
 <script src="/socket.io/socket.io.js"></script>
