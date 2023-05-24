@@ -14,6 +14,8 @@ import passport from "passport";
 import cookieParser from "cookie-parser";
 import initializePassport from "./config/passport.config.js";
 import config from "./config/config.js";
+import swaggerUiExpress from 'swagger-ui-express'
+import swaggerJSDoc from 'swagger-jsdoc';
 
 import __dirname from "./utils.js"
 import { passportCall } from "./utils.js"
@@ -61,7 +63,22 @@ mongoose.connect(config.mongoURI, {
         req.io = socketServer
         next()
     })
+    
+    const swaggerOptions = {
+        definition: {
+            openapi: '3.0.1',
+            info: {
+                title: "Documentation E Commerce API",
+                description: "Proyecto en crecimiento para CODERHOUSE"
+            }
+        },
+        apis: [`${__dirname}/docs/**/*.yaml`]
+    }
+    
+    const specs = swaggerJSDoc(swaggerOptions);
+    app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
+    app.use('/', productViewsRouter)
     app.use("/products", passportCall('jwt'), productRouter)
     app.use(`/product/productViewsRouter`, passportCall('jwt'), productViewsRouter)
 
@@ -71,7 +88,6 @@ mongoose.connect(config.mongoURI, {
     app.use("/api/carts",passportCall('jwt'), cartRouter)
     app.use("/api/chat",passportCall('jwt'), chatRouter)
 
-    app.use('/', productViewsRouter)
 
     socketServer.on("connection", socket => {
         console.log("New client connected")
